@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/xTigerFace/Yahoo-Football-Bot#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "discord.js": "^14.3.0",
     "dotenv": "^16.0.2"
   }

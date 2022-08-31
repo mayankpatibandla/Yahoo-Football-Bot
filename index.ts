@@ -1,9 +1,10 @@
-import DiscordJS, { GatewayIntentBits } from 'discord.js'
+import DJS, { GatewayIntentBits } from 'discord.js'
 import dotenv from 'dotenv'
+import axios from 'axios'
 
 dotenv.config()
 
-const client = new DiscordJS.Client({
+const client = new DJS.Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
@@ -12,7 +13,7 @@ const client = new DiscordJS.Client({
 })
 
 client.on('ready', () => {
-  console.log('Bot is ready')
+  console.log(`Logged in as ${client.user?.tag}`)
 
   client.user?.setPresence({
     status: 'dnd',
@@ -37,6 +38,11 @@ client.on('ready', () => {
     name: 'ping',
     description: "Replies with the bot's ping to the server",
   })
+
+  commands?.create({
+    name: 'abc',
+    description: 'Replies with test data from dummy API',
+  })
 })
 
 client.on('interactionCreate', async (interaction) => {
@@ -47,6 +53,14 @@ client.on('interactionCreate', async (interaction) => {
   if (commandName === 'ping') {
     interaction.reply({
       content: `Latency: ${client.ws.ping} ms`,
+      ephemeral: true,
+    })
+  } else if (commandName === 'abc') {
+    let uri = 'https://jsonplaceholder.typicode.com/todos/1'
+    const { data } = await axios.get(uri)
+    console.log(data)
+    interaction.reply({
+      content: data.title,
       ephemeral: true,
     })
   }
