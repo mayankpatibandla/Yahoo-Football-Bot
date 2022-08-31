@@ -1,13 +1,13 @@
-import DiscordJS, { Snowflake } from 'discord.js'
+import DiscordJS, { GatewayIntentBits } from 'discord.js'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
 const client = new DiscordJS.Client({
   intents: [
-    Snowflake.Guilds,
-    Snowflake.GuildMessages,
-    Snowflake.GuildPresences,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildPresences,
   ],
 })
 
