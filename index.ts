@@ -1,6 +1,7 @@
 import DJS, { GatewayIntentBits } from 'discord.js'
 import dotenv from 'dotenv'
 import axios from 'axios'
+import fs from 'fs'
 
 dotenv.config()
 
